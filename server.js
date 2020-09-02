@@ -2,7 +2,7 @@
 // =============================================================
 const express = require("express");
 const path = require("path");
-const dbJson = require("./db/db.json");
+const dbPath = require("./db/db.json");
 
 // Sets up the Express App
 // =============================================================
@@ -19,15 +19,15 @@ app.use(express.static('public'));
 
 // Basic route that sends the user first to the AJAX Page
 app.get("/", function (req, res) {
-    res.sendFile(path.join(__dirname, "public\index.html"));
+    res.sendFile(path.join(__dirname, "public/index.html"));
 });
 
 app.get("/notes", function (req, res) {
-    res.sendFile(path.join(__dirname, "public\notes.html"));
+    res.sendFile(path.join(__dirname, "public/notes.html"));
 });
 
 app.get("/api/notes", function (req, res) {
-    return res.json(dbJson);
+    res.json(dbPath);
 });
 
 app.post("api/notes", function (req, res) {
@@ -35,15 +35,15 @@ app.post("api/notes", function (req, res) {
 });
 
 app.delete("api/notes/:id", function (req, res) {
-    res.send("Delete request at /user")
+    res.sendFile("Delete request at /user")
 });
 
 app.get("*", function (req, res) {
-    res.sendFile(path.join(_dirname, index.html))
-})
+    res.sendFile(path.join(__dirname, index.html))
+});
 
 // Starts the server to begin listening
 // =============================================================
 app.listen(PORT, function() {
-    console.log("App listening on PORT: " + PORT)
-})
+    console.log("App listening on http:/localhost" + PORT)
+});
